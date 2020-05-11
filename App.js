@@ -11,6 +11,7 @@ const [people, setPeople] = useState([
   {name: 'moad4', id:'4'},
   {name: 'moad5', id:'5'},
   {name: 'moad6', id:'6'},
+  {name: 'moad6', id:'7'},
 
 ]);
 
