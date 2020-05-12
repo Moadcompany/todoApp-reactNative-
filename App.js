@@ -56,12 +56,15 @@ const styles = StyleSheet.create({
     },
   
     content: {
+      flex:1
     },
 
     list:{
       textAlign: "center",
       padding: 20,
       marginLeft: 10,
+      flex:1
+
     },
 
 });
