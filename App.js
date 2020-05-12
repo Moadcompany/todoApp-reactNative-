@@ -1,46 +1,68 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-
+import { StyleSheet, Text, View, FlatList} from 'react-native';
+import Header from './components/header'
+import TodoItem from './components/todoitem'
+import Addtodo from './components/addtodo'
 
 export default function App() {
-const [people, setPeople] = useState([
+  const [todos, setTodos] = useState([
+    {text: 'todo number1', key:'1'},
+    {text: 'todo number2', key:'2'},
+    {text: 'todo number3', key:'3'},
+    {text: 'todo number4', key:'4'},
+    {text: 'todo number5', key:'5'},
+  ]);
 
-  {name: 'moad', id:'1'},
-  {name: 'moad2', id:'2'},
-  {name: 'moad3', id:'3'},
-  {name: 'moad4', id:'4'},
-  {name: 'moad5', id:'5'},
-  {name: 'moad6', id:'6'},
-  {name: 'moad6', id:'7'},
-  {name: 'moad6', id:'6'},
-  {name: 'moad6', id:'7'},
-  {name: 'moad6', id:'6'},
-  {name: 'moad6', id:'7'},
+  const pressHandler = (key)=>{
+    setTodos((prevTodos) => {
+      return prevTodos.filter(todo => todo.key != key);
+    });
+  }
 
-]);
+  const submitHandler = (text) => {
+    setTodos ((prevTodos)=>{
+      return[
+        {text: text, key: Math.random().toString()},
+        ...prevTodos
+      ];
+    })
+  }
 
   return (
     <View style={styles.container}>
+    <Header/>
+      <View style={styles.content}>
+      <Addtodo submitHandler={submitHandler}/>
+        <View style={styles.list}>
+          
+          <FlatList 
+            data={todos}
+              renderItem={({item}) => (
+                <TodoItem item={item} pressHandler = {pressHandler} />
+            )}
 
-    {people.map((v) => {
-      return (
-        <View> 
-        <Text> {v.name} </Text>
+            />
+
         </View>
-      )
-    } )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    },
+  
+    content: {
+    },
+
+    list:{
+      textAlign: "center",
+      padding: 20,
+      marginLeft: 10,
+    },
 
 });
 
